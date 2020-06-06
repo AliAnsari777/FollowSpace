@@ -1,6 +1,8 @@
 package com.followspace.spaceshipinfo;
 
+import com.followspace.spaceshipinfo.Models.AllInformation;
 import com.followspace.spaceshipinfo.Models.Crew;
+import com.followspace.spaceshipinfo.Models.Location;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +17,18 @@ public class SpaceshipinfoApplication {
     }
 
     @Bean
+    public Location getLocation(){
+        return new Location();
+    }
+
+    @Bean
     public Crew getCrew(){
         return new Crew();
+    }
+
+    @Bean
+    public AllInformation getAllInformation(){
+        return new AllInformation();
     }
 
     public static void main(String[] args) {

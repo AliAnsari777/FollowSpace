@@ -1,9 +1,12 @@
 package com.followspace.spaceshipinfo.Services;
 
-import com.followspace.spaceshipinfo.Models.Spaceship;
+import com.followspace.spaceshipinfo.Models.Crew;
+import com.followspace.spaceshipinfo.Models.Location;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface RequestInfo {
-    public Spaceship getInfo();
+    Location getLocation(String ID);
+
+    Crew getCrew(String ID);
 }

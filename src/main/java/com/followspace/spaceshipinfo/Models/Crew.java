@@ -1,34 +1,31 @@
 package com.followspace.spaceshipinfo.Models;
 
 
+import java.util.List;
+import java.util.Map;
+
 public class Crew {
-    private String fullName;
-    private String bio;
     private String image;
+    private String message;
+    private int number;
+    private List<Map<String, String>> people;
 
     public Crew() {
     }
 
-    public Crew(String fullName, String bio, String image) {
-        this.fullName = fullName;
-        this.bio = bio;
+    public Crew(String message, String image, int number, List<Map<String, String>> people) {
+        this.message = message;
         this.image = image;
+        this.number = number;
+        this.people = people;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getMessage() {
+        return message;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getImage() {
@@ -37,5 +34,21 @@ public class Crew {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public List<Map<String, String>> getPeople() {
+        return people;
+    }
+
+    public void setPeople(List<Map<String, String>> people) {
+        this.people = people;
     }
 }

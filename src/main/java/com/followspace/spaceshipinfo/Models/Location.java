@@ -4,19 +4,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Spaceship {
+public class Location {
 
     private String message;
-    private String description;
     private Date timestamp;
-    private Map<String, Double> iss_position = new HashMap<String, Double>();
+    private Map<String, Double> iss_position = new HashMap<>();
 
-    public Spaceship() {
+    public Location() {
     }
 
-    public Spaceship(String message, String description, Date timestamp, Map<String, Double> iss_position) {
+    public Location(String message, Date timestamp, Map<String, Double> iss_position) {
         this.message = message;
-        this.description = description;
         this.timestamp = timestamp;
         this.iss_position = iss_position;
     }
@@ -27,14 +25,6 @@ public class Spaceship {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Date getTimestamp() {
