@@ -56,7 +56,7 @@ public class SpaceshipController {
         return requestInfo.getCrew(ID);
     }
 
-    @GetMapping("/{ID}/people")
+    @GetMapping("/{ID}/personnel")
     public List<Crew> getPersonnel(@PathVariable("ID") String ID){
         Personnel personnel = requestInfo.getPersonnel(ID);
         int crewSize = personnel.getPeople().size();
@@ -67,6 +67,7 @@ public class SpaceshipController {
             person = personnel.getPeople().get(i);
             onePerson.setName(person.get("name"));
             onePerson.setMember(person.get("craft"));
+            onePerson.setNumber(personnel.getNumber());
 
             Jwiki jwiki = new Jwiki(person.get("name"));
             onePerson.setAbout(jwiki.getExtractText());
