@@ -5,8 +5,7 @@ import com.followspace.spaceshipinfo.Models.AllInformation;
 import com.followspace.spaceshipinfo.Models.Crew;
 
 import com.followspace.spaceshipinfo.Models.Location;
-import com.followspace.spaceshipinfo.Models.People;
-import com.followspace.spaceshipinfo.Repository.SpaceshipRepository;
+import com.followspace.spaceshipinfo.Models.Personnel;
 import com.followspace.spaceshipinfo.Services.RequestInfo;
 import com.followspace.spaceshipinfo.Services.impl.SpaceshipImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +21,17 @@ public class SpaceshipController {
 
     private RequestInfo requestInfo;
     private Crew crew;
-    private List<Crew> crews = new ArrayList<>();
-    private People people;
+    private List<Crew> listOfCrewInformation = new ArrayList<>();
     private Location location;
     private AllInformation allInformation;
     private SpaceshipImplementation spaceshipImplementation;
 
     @Autowired
-    public SpaceshipController(RequestInfo requestInfo, Crew crew, Location location, List<Crew> crews,
+    public SpaceshipController(RequestInfo requestInfo, Crew crew, Location location,
                                AllInformation allInformation, SpaceshipImplementation spaceshipImplementation) {
         this.requestInfo = requestInfo;
         this.crew = crew;
         this.location = location;
-//        this.crews = crews;
         this.allInformation = allInformation;
         this.spaceshipImplementation = spaceshipImplementation;
     }
@@ -60,25 +57,24 @@ public class SpaceshipController {
     }
 
     @GetMapping("/{ID}/people")
-    public List<Crew> getPeople(@PathVariable("ID") String ID){
-        people = requestInfo.getPeople(ID);
-        int crewSize = people.getPeople().size();
+    public List<Crew> getPersonnel(@PathVariable("ID") String ID){
+        Personnel personnel = requestInfo.getPersonnel(ID);
+        int crewSize = personnel.getPeople().size();
         Map<String, String> person;
 
         for (int i = 0; i < crewSize; i++) {
-            Crew creww = new Crew();
-            person = people.getPeople().get(i);
-            String name = person.get("name");
-            creww.setName(name);
-            creww.setMember(person.get("craft"));
+            Crew onePerson = new Crew();
+            person = personnel.getPeople().get(i);
+            onePerson.setName(person.get("name"));
+            onePerson.setMember(person.get("craft"));
 
-            Jwiki jwiki = new Jwiki(name);
-            creww.setAbout(jwiki.getExtractText());
-            creww.setProfilePic(jwiki.getImageURL());
+            Jwiki jwiki = new Jwiki(person.get("name"));
+            onePerson.setAbout(jwiki.getExtractText());
+            onePerson.setProfilePic(jwiki.getImageURL());
 
-            crews.add(creww);
+            listOfCrewInformation.add(onePerson);
         }
-        return crews;
+        return listOfCrewInformation;
     }
 
     @PostMapping(path = "/{ID}/crew/post")

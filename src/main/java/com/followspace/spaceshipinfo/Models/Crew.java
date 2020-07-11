@@ -19,7 +19,7 @@ public class Crew {
     Integer Id;
 
     private String image;
-    private String message;
+//    private String message;
     private int number;
     private String expedition;
 
@@ -38,7 +38,7 @@ public class Crew {
     public Crew(String image, String message, int number, String name,
                 String expedition, LocalDate date, String about, String member, String profilePic) {
         this.image = image;
-        this.message = message;
+//        this.message = message;
         this.number = number;
         this.name = name;
         this.expedition = expedition;
@@ -57,13 +57,13 @@ public class Crew {
         this.Id = id;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
+//    public String getMessage() {
+//        return message;
+//    }
+//
+//    public void setMessage(String message) {
+//        this.message = message;
+//    }
 
     public String getImage() {
         return image;

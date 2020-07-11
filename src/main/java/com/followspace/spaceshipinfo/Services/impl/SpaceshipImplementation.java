@@ -2,7 +2,7 @@ package com.followspace.spaceshipinfo.Services.impl;
 
 import com.followspace.spaceshipinfo.Models.Crew;
 import com.followspace.spaceshipinfo.Models.Location;
-import com.followspace.spaceshipinfo.Models.People;
+import com.followspace.spaceshipinfo.Models.Personnel;
 import com.followspace.spaceshipinfo.Repository.SpaceshipRepository;
 import com.followspace.spaceshipinfo.Services.RequestInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class SpaceshipImplementation implements RequestInfo {
     private Crew crew;
 
     @Autowired
-    private People people;
+    private Personnel personnel;
 
     SpaceshipRepository spaceshipRepository;
 
@@ -51,9 +51,9 @@ public class SpaceshipImplementation implements RequestInfo {
     }
 
     @Override
-    public People getPeople(String ID) {
-        people = restTemplate.getForObject(crewURL, People.class);
-        return people;
+    public Personnel getPersonnel(String ID) {
+        personnel = restTemplate.getForObject(crewURL, Personnel.class);
+        return personnel;
     }
 
     public Crew postCrew(Crew crew){

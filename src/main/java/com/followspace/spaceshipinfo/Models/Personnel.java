@@ -1,18 +1,9 @@
 package com.followspace.spaceshipinfo.Models;
 
-import com.sun.istack.NotNull;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.List;
 import java.util.Map;
 
-public class People {
+public class Personnel {
 
 //    @Id
 //    @NotNull
@@ -22,10 +13,10 @@ public class People {
     private int number;
     private List<Map<String, String>> people;
 
-    public People() {
+    public Personnel() {
     }
 
-    public People(String message, int number, List<Map<String, String>> people) {
+    public Personnel(String message, int number, List<Map<String, String>> people) {
         this.message = message;
         this.number = number;
         this.people = people;
