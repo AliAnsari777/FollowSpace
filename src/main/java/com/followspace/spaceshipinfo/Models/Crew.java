@@ -35,12 +35,12 @@ public class Crew {
     public Crew() {
     }
 
-    public Crew(String image, String message, int number, List<Map<String, String>> people,
+    public Crew(String image, String message, int number, String name,
                 String expedition, LocalDate date, String about, String member, String profilePic) {
         this.image = image;
         this.message = message;
         this.number = number;
-//        this.people = people;
+        this.name = name;
         this.expedition = expedition;
         this.date = date;
         this.about = about;

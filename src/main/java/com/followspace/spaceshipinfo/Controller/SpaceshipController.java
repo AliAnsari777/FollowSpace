@@ -1,5 +1,6 @@
 package com.followspace.spaceshipinfo.Controller;
 
+import com.followspace.spaceshipinfo.Midelware.Jwiki;
 import com.followspace.spaceshipinfo.Models.AllInformation;
 import com.followspace.spaceshipinfo.Models.Crew;
 
@@ -11,6 +12,8 @@ import com.followspace.spaceshipinfo.Services.impl.SpaceshipImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,17 +22,19 @@ public class SpaceshipController {
 
     private RequestInfo requestInfo;
     private Crew crew;
+    private List<Crew> crews = new ArrayList<>();
     private People people;
     private Location location;
     private AllInformation allInformation;
     private SpaceshipImplementation spaceshipImplementation;
 
     @Autowired
-    public SpaceshipController(RequestInfo requestInfo, Crew crew, Location location,
+    public SpaceshipController(RequestInfo requestInfo, Crew crew, Location location, List<Crew> crews,
                                AllInformation allInformation, SpaceshipImplementation spaceshipImplementation) {
         this.requestInfo = requestInfo;
         this.crew = crew;
         this.location = location;
+//        this.crews = crews;
         this.allInformation = allInformation;
         this.spaceshipImplementation = spaceshipImplementation;
     }
@@ -55,13 +60,25 @@ public class SpaceshipController {
     }
 
     @GetMapping("/{ID}/people")
-    public People getPeople(@PathVariable("ID") String ID){
+    public List<Crew> getPeople(@PathVariable("ID") String ID){
         people = requestInfo.getPeople(ID);
         int crewSize = people.getPeople().size();
+        Map<String, String> person;
 
-        Map<String, String> person = people.getPeople().get(0);
-        System.out.println(person.get("name"));
-        return people;
+        for (int i = 0; i < crewSize; i++) {
+            Crew creww = new Crew();
+            person = people.getPeople().get(i);
+            String name = person.get("name");
+            creww.setName(name);
+            creww.setMember(person.get("craft"));
+
+            Jwiki jwiki = new Jwiki(name);
+            creww.setAbout(jwiki.getExtractText());
+            creww.setProfilePic(jwiki.getImageURL());
+
+            crews.add(creww);
+        }
+        return crews;
     }
 
     @PostMapping(path = "/{ID}/crew/post")
