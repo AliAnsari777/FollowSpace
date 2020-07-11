@@ -4,28 +4,36 @@ import com.followspace.spaceshipinfo.Models.AllInformation;
 import com.followspace.spaceshipinfo.Models.Crew;
 
 import com.followspace.spaceshipinfo.Models.Location;
+import com.followspace.spaceshipinfo.Models.People;
+import com.followspace.spaceshipinfo.Repository.SpaceshipRepository;
 import com.followspace.spaceshipinfo.Services.RequestInfo;
+import com.followspace.spaceshipinfo.Services.impl.SpaceshipImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/followspace")
 public class SpaceshipController {
 
-    @Autowired
     private RequestInfo requestInfo;
-
-    @Autowired
     private Crew crew;
-
-    @Autowired
+    private People people;
     private Location location;
+    private AllInformation allInformation;
+    private SpaceshipImplementation spaceshipImplementation;
 
     @Autowired
-    private AllInformation allInformation;
+    public SpaceshipController(RequestInfo requestInfo, Crew crew, Location location,
+                               AllInformation allInformation, SpaceshipImplementation spaceshipImplementation) {
+        this.requestInfo = requestInfo;
+        this.crew = crew;
+        this.location = location;
+        this.allInformation = allInformation;
+        this.spaceshipImplementation = spaceshipImplementation;
+    }
+
 
     @GetMapping("/{ID}")
     public AllInformation getAllInformation(@PathVariable("ID") String ID){
@@ -44,6 +52,21 @@ public class SpaceshipController {
     @GetMapping("/{ID}/crew")
     public Crew getCrew(@PathVariable("ID") String ID){
         return requestInfo.getCrew(ID);
+    }
+
+    @GetMapping("/{ID}/people")
+    public People getPeople(@PathVariable("ID") String ID){
+        people = requestInfo.getPeople(ID);
+        int crewSize = people.getPeople().size();
+
+        Map<String, String> person = people.getPeople().get(0);
+        System.out.println(person.get("name"));
+        return people;
+    }
+
+    @PostMapping(path = "/{ID}/crew/post")
+    public Crew postCrew(@RequestBody Crew crew){
+        return spaceshipImplementation.postCrew(crew);
     }
 
 }

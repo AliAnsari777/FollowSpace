@@ -1,35 +1,60 @@
 package com.followspace.spaceshipinfo.Models;
 
 
+import com.sun.istack.NotNull;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+@Entity
 public class Crew {
+
+    @Id
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer Id;
+
     private String image;
     private String message;
     private int number;
-    private List<Map<String, String>> people;
     private String expedition;
+
+
+    private String name;
     private LocalDate date;
     private String about;
-    private String stationMember;
+    private String member;
     private String profilePic;
+
+
 
     public Crew() {
     }
 
     public Crew(String image, String message, int number, List<Map<String, String>> people,
-                String expedition, LocalDate date, String about, String stationMember, String profilePic) {
+                String expedition, LocalDate date, String about, String member, String profilePic) {
         this.image = image;
         this.message = message;
         this.number = number;
-        this.people = people;
+//        this.people = people;
         this.expedition = expedition;
         this.date = date;
         this.about = about;
-        this.stationMember = stationMember;
+        this.member = member;
         this.profilePic = profilePic;
+    }
+
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        this.Id = id;
     }
 
     public String getMessage() {
@@ -56,12 +81,21 @@ public class Crew {
         this.number = number;
     }
 
-    public List<Map<String, String>> getPeople() {
-        return people;
+//    public List<Map<String, String>> getPeople() {
+//        return people;
+//    }
+//
+//    public void setPeople(List<Map<String, String>> people) {
+//        this.people = people;
+//    }
+
+
+    public String getName() {
+        return name;
     }
 
-    public void setPeople(List<Map<String, String>> people) {
-        this.people = people;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getExpedition() {
@@ -88,12 +122,12 @@ public class Crew {
         this.about = about;
     }
 
-    public String getStationMember() {
-        return stationMember;
+    public String getMember() {
+        return member;
     }
 
-    public void setStationMember(String stationMember) {
-        this.stationMember = stationMember;
+    public void setMember(String member) {
+        this.member = member;
     }
 
     public String getProfilePic() {

@@ -3,6 +3,7 @@ package com.followspace.spaceshipinfo;
 import com.followspace.spaceshipinfo.Models.AllInformation;
 import com.followspace.spaceshipinfo.Models.Crew;
 import com.followspace.spaceshipinfo.Models.Location;
+import com.followspace.spaceshipinfo.Models.People;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,9 @@ public class SpaceshipinfoApplication {
     public Crew getCrew(){
         return new Crew();
     }
+
+    @Bean
+    public People getPeople() { return new People(); }
 
     @Bean
     public AllInformation getAllInformation(){
